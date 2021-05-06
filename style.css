@@ -1,0 +1,57 @@
+header{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+.logo img{
+  width: 300px;
+}
+
+.return-top{
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999999;
+}
+
+.list-photographer-item__img {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+.list-photographer-item__tags {
+    display: flex;
+}
+
+.list-photographer-item__img__content {
+  width: 100%;
+  height: auto;
+}
+
+.list-photographer-item {
+    margin: 20px  120px  20px  120px;
+}
+
+#list-photographer{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+
+
+.list-photographer-item__name , .list-photographer-item__caption{
+  text-align: center;
+}
