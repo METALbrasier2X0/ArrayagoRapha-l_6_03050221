@@ -1,7 +1,19 @@
+html{
+  max-width: 1800px;
+  margin: auto;
+  font: 'AmstelvarAlpha', sans-serif;
+}
+
 header{
-  width: 100%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
+  margin-top: 35px;
+}
+
+h3{
+  color: #D3573C;
+  font-size: 2em;
 }
 
 a{
@@ -13,14 +25,45 @@ a{
   width: 300px;
 }
 
+.list-photographer-item__caption__location{
+  color: #901c1c;
+}
+
+.photographer-link{
+font-size: 2.5em;
+float: right;
+margin-top: -60px;
+margin-right: 60px;
+color: #911616;
+}
+
+.tag {
+    color: #911616;
+    border: 1px solid #cbcbcb;
+    border-radius: 20px;
+    padding: 4px 7px 4px 7px;
+    margin: 5px;
+    height: min-content;
+}
+
 .return-top{
   position: fixed;
   top: 20px;
   left: 50%;
+  color: black;
+  background-color:#D3573C;
+  border: 1px solid #D3573C;
+  border-radius: 10px;
+  padding: 4px 7px 4px 7px;
+  height: min-content;
   transform: translateX(-50%);
+  font-weight: 600;
+
   z-index: 9999999;
 }
-
+.list-photographer-item__caption__price{
+  color: #525252;
+}
 .list-photographer-item__img {
   position: relative;
   width: 250px;
@@ -31,8 +74,9 @@ a{
 box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 
-.list-photographer-item__tags {
+.navigation {
     display: flex;
+    margin-top: 20px;
 }
 
 .list-photographer-item__img__content {
@@ -41,7 +85,7 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 
 .list-photographer-item {
-    margin: 20px  120px  20px  120px;
+    margin: 10px  120px  10px  120px;
 }
 
 #list-photographer{
@@ -54,4 +98,9 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 
 .list-photographer-item__name , .list-photographer-item__caption{
   text-align: center;
+  margin: 10px;
+}
+
+.list-photographer-item__caption__location , .list-photographer-item__caption__phrase , .list-photographer-item__caption__price{
+  margin: 5px;
 }
