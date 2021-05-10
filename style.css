@@ -15,6 +15,10 @@ h3{
   color: #D3573C;
   font-size: 2em;
 }
+h2{
+  color: #D3573C;
+  font-size: 3em;
+}
 
 a{
   color: black;
@@ -103,4 +107,56 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 
 .list-photographer-item__caption__location , .list-photographer-item__caption__phrase , .list-photographer-item__caption__price{
   margin: 5px;
+}
+
+.work-photographer-item__img{
+  position: relative;
+  width: 400px;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+#photographer-info {
+    margin: 50px;
+    background-color: #fafafa;
+    padding: 25px;
+}
+.photographer-info__img {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    border-radius: 50%;
+    float: right;
+    top: -250px;
+    margin-right: 5%;
+}
+.photographer-info__img__content {
+    width: 100%;
+}
+#work-photographer{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+.top-info {
+    display: flex;
+}
+.contact-info{
+  color: white;
+    background-color: #911616;
+padding: 20px;
+    border-radius: 10px;
+    margin-left: 5%;
+
+}
+.photographer-info__name{
+  margin: 0px;
 }
