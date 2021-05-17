@@ -2,13 +2,15 @@
 
 <html lang="fr" dir="ltr">
 
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" type="image/png" href="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <title></title>
-  </head>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/png" href="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <title></title>
+</head>
 
 
     <body>
@@ -24,6 +26,58 @@
                <div class="navigation" aria-label="photographer categories"><p class="tag">bruh</p><p class="tag">bruh</p><p class="tag">bruh</p><p class="tag">bruh</p><p class="tag">bruh</p></div>
            <div class="photographer-info__img"><img class="photographer-info__img__content" src="img\ID\NabeelBradford.jpg" alt=""> </div>
         </section>
+
+        <div class="bground">
+          <div class="content">
+            <span class="close"></span>
+            <div class="modal-body">
+              <form
+                id="form"
+                name="reserve"
+                action="index.html"
+                method="get"
+                onsubmit="return validate();"
+              >
+                <div
+                  class="formData">
+                  <label>Prénom</label><br>
+                  <input
+                    class="text-control"
+                    type="text"
+                    id="first"
+                    name="first"
+                  /> <p class="error" id="errorname"></p>
+                </div>
+                <div
+                  class="formData">
+                  <label>Nom</label><br>
+                  <input
+                    class="text-control"
+                    type="text"
+                    id="last"
+                    name="last"
+                  /><p class="error" id="errorlast"></p>
+                </div>
+                <div
+                  class="formData">
+                  <label>E-mail</label><br>
+                  <input
+                    class="text-control"
+                    type="text"
+                    id="email"
+                    name="email"
+                  /><p class="error" id="errormail"></p>
+                </div>
+                <input
+                  class="btn-submit"
+                  type="submit"
+                  class="button"
+                  value="C'est parti"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
 
       <section id="work-photographer">
 
