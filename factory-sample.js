@@ -1,24 +1,50 @@
-function Factory() {
-    this.createEmployee = function (type) {
-        var employee;
+
+// DOM Elements
+const modalBtn = document.querySelectorAll(".contact-info");
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", run));
+
+//
+// readJson () {
+//    // http://localhost:8080
+//    fetch('/Reading/api/file')
+//    .then(response => {
+//        if (!response.ok) {
+//            throw new Error("HTTP error " + response.status);
+//        }
+//        return response.json();
+//    })
+//    .then(json => {
+//        this.users = json;
+//        //console.log(this.users);
+//    })
+//    .catch(function () {
+//        this.dataError = true;
+//    })
+// }
+
+
+function Creator() {
+    this.createPhotographe = function (type) {
+        var photographe;
 
         if (type === "fulltime") {
-            employee = new FullTime();
+            photographe = new FullTime();
         } else if (type === "parttime") {
-            employee = new PartTime();
+            photographe = new PartTime();
         } else if (type === "temporary") {
-            employee = new Temporary();
+            photographe = new Temporary();
         } else if (type === "contractor") {
-            employee = new Contractor();
+            photographe = new Contractor();
         }
 
-        employee.type = type;
+        photographe.type = type;
 
-        employee.say = function () {
+        photographe.say = function () {
             log.add(this.type + ": rate " + this.hourly + "/hour");
         }
 
-        return employee;
+        return photographe;
     }
 }
 
@@ -44,21 +70,21 @@ var log = (function () {
 
     return {
         add: function (msg) { log += msg + "\n"; },
-        show: function () { alert(log); log = ""; }
+        show: function () { alert(log); log = ""; },
     }
 })();
 
 function run() {
-    var employees = [];
-    var factory = new Factory();
+    var photographes = [];
+    var creator = new Creator();
 
-    employees.push(factory.createEmployee("fulltime"));
-    employees.push(factory.createEmployee("parttime"));
-    employees.push(factory.createEmployee("temporary"));
-    employees.push(factory.createEmployee("contractor"));
+    photographes.push(creator.createPhotographe("fulltime"));
+    photographes.push(creator.createPhotographe("parttime"));
+    photographes.push(creator.createPhotographe("temporary"));
+    photographes.push(creator.createPhotographe("contractor"));
 
-    for (var i = 0, len = employees.length; i < len; i++) {
-        employees[i].say();
+    for (var i = 0, len = photographes.length; i < len; i++) {
+        photographes[i].say();
     }
 
     log.show();

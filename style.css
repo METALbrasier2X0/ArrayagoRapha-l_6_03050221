@@ -123,7 +123,10 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 #photographer-info {
     margin: 50px;
     background-color: #fafafa;
-    padding: 25px;
+    padding: 60px;
+}
+.work-photographer__trie {
+    display: flex;
 }
 .photographer-info__img {
     position: relative;
@@ -154,13 +157,18 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 .contact-info{
   color: white;
     background-color: #911616;
-padding: 20px;
+padding:27px;;
+font-weight: 600;
     border-radius: 10px;
     margin-left: 5%;
 
 }
 .photographer-info__name{
   margin: 0px;
+}
+.work-photographer-item__name {
+    font-size: 1.7em;
+    color: #911616;
 }
 /* modal */
 
@@ -193,7 +201,11 @@ padding: 20px;
   padding: 15px 8%;
   margin: 15px auto;
 }
-
+.photographer-info__caption__location {
+    text-transform: uppercase;
+    font-size: 1.7em;
+    color: #911616;
+}
 label {
   font-family: var(--font-default);
   font-size: 17px;
