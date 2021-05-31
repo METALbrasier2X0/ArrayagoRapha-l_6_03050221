@@ -1,28 +1,24 @@
 
 // DOM Elements
-const modalBtn = document.querySelectorAll(".contact-info");
+const refrshBtn = document.querySelectorAll(".refresh-info");
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", run));
+refrshBtn.forEach((btn) => btn.addEventListener("click", readJson));
 
-//
-// readJson () {
-//    // http://localhost:8080
-//    fetch('/Reading/api/file')
-//    .then(response => {
-//        if (!response.ok) {
-//            throw new Error("HTTP error " + response.status);
-//        }
-//        return response.json();
-//    })
-//    .then(json => {
-//        this.users = json;
-//        //console.log(this.users);
-//    })
-//    .catch(function () {
-//        this.dataError = true;
-//    })
-// }
 
+function link(id) {
+window.location.href = "photographe.html?"+id;}
+
+
+function readJson () {
+  var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    };
+    xhttp.open("GET", "https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/Front-End+V2/P5+Javascript+%26+Accessibility/FishEyeData.json", true);
+    xhttp.send();
+}
 
 function Creator() {
     this.createPhotographe = function (type) {
