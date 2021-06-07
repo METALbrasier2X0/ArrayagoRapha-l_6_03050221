@@ -8,7 +8,6 @@ header{
   width: 60%;
   display: flex;
   justify-content: space-between;
-  margin-top: 35px;
 }
 
 h3{
@@ -669,4 +668,104 @@ a.icon:hover{
 
 .smFont {
   font-size: 16px;
+}
+/* Media queries  */
+@media screen and (max-width: 1000px){
+
+.logo img {
+  margin-top: 20px;
+  width: 280px;
+  margin-left: -10px;
+}
+
+.list-photographer-item__img {
+    position: relative;
+    width: 200px;
+    height: 200px;}
+
+.photographer-link {
+  font-size: 1.3em;
+float: right;
+margin-top: -43px;
+margin-right: 15px;
+}
+.navigation-index {
+    display: flex;
+    margin-top: 84px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+justify-content: center;
+}
+}
+
+@media screen and (max-width: 500px){
+
+.logo img {
+  margin-top: 20px;
+    width: 170px;
+    margin-left: -20px;
+}
+
+.photographer-link {
+  font-size: 1em;
+  float: right;
+  margin-top: -33px;
+  margin-right: 10px;
+  color: #911616;
+}
+}
+@media screen and (max-width: 900px){
+.contact-info {
+    display: none;
+}
+
+.photographer-info__img {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    border-radius: 50%;
+    float: right;
+    top: -180px;
+    margin-right: 0%;
+}
+#photographer-info {
+    margin: 0px;
+    background-color: white;
+  padding: 10px;}
+
+    .work-photographer-item__img {
+    position: relative;
+    width: 300px;
+    height: 220px;
+  }
+
+  .navigation-photo {
+      display: flex;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      justify-content: left;
+      left: 0;
+      width: 50%;
+  }
+h2 {
+    color: #D3573C;
+    font-size: 2em;
+}
+.photographer-info__caption__location {
+    text-transform: none;
+    font-size: 1em;
+    color: #911616;
+    margin: 0;
+}
+.photographer-info__caption__phrase {
+    margin: 0;
+}
+
 }

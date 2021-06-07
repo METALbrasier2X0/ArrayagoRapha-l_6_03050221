@@ -1,31 +1,36 @@
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
+const modalbgcontact = document.querySelector(".bground-contact");
+const modalbgphoto = document.querySelector(".bground-photo");
 const modalBtn = document.querySelectorAll(".contact-info");
 const closeBtn = document.querySelectorAll(".close");
 const formData = document.querySelectorAll(".formData");
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModalcontact));
 
 
 // close modal event
-closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+closeBtn.forEach((btn) => btn.addEventListener("click", closeModalcontact));
 
 
 
 // launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
+function launchModalcontact() {
+  modalbgcontact.style.display = "block";
 }
 
 // close modal form
-function closeModal() {
+function closeModalcontact() {
 
   document.getElementById("form").reset();
-  modalbg.style.display = "none";
+  modalbgcontact.style.display = "none";
   document.getElementById("valid-content").style.display = "none";
   document.getElementById("valid").style.display = "none";
 }
+
+
+if(window.scrollY==0){
+  document.getElementById("top").style.display = "none";}
 
 // .className = "error";
