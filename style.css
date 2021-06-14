@@ -5,7 +5,7 @@ html{
 }
 
 header{
-  width: 60%;
+  width: 65%;
   display: flex;
   justify-content: space-between;
 }
@@ -15,7 +15,7 @@ h3{
   font-size: 2em;
 }
 h2{
-  color: #D3573C;
+  color: #D3573C;s
   font-size: 3em;
 }
 
@@ -70,14 +70,15 @@ color: #911616;
   color: #525252;
 }
 .list-photographer-item__img {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  overflow: hidden;
-  border-radius: 50%;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
-}
+    position: relative;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    margin: auto;
+    display: block;}
 
 .navigation {
     display: flex;
@@ -86,24 +87,35 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 
 .list-photographer-item__img__content {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .list-photographer-item {
     margin: 10px  120px  10px  120px;
 }
-
+.list-photographer-item {
+    margin: 10px 100px 10px 100px;
+    width: 300px;
+}
 #list-photographer{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 100px;
 }
-
-
+.list-photographer-item__tags {
+    display: flex;
+    justify-content: center;
+}
+.list-photographer-item__name{
+  margin-top: 20px!important;
+}
 .list-photographer-item__name , .list-photographer-item__caption{
   text-align: center;
-  margin: 10px;
+white-space: pre-wrap;
+margin-bottom: 0px;
+width: 100%;
 }
 
 .list-photographer-item__caption__location , .list-photographer-item__caption__phrase , .list-photographer-item__caption__price{
