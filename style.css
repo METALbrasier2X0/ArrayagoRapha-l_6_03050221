@@ -15,7 +15,7 @@ h3{
   font-size: 2em;
 }
 h2{
-  color: #D3573C;s
+  color: #D3573C;
   font-size: 3em;
 }
 
@@ -89,6 +89,21 @@ color: #911616;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.trie-select {
+    color: white;
+    background-color: #911616;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    height: 50px;
+    width: 110px;
+    padding-left: 10px;
+}
+
+.trie-select option{
+ border-bottom: 1px solid white;
 }
 
 .list-photographer-item {
@@ -193,7 +208,9 @@ font-weight: 600;
     font-size: 1.7em;
 }
 
-
+.trie-zone{
+  padding-left: 70px;
+}
 
 
 /* modal */
@@ -209,6 +226,89 @@ font-weight: 600;
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
+
+.bground-photo {
+  background-color: white;
+}
+
+.bground-photo .content {
+  background: white;
+  margin: -1% auto;
+width: 100%;
+max-width: 100%;
+animation-name: modalopen;
+animation-duration: var(--modal-duration);
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+color: black;
+padding-top: 10px;
+height: 100vh;
+}
+
+.bground-photo .modal-body {
+    padding: 15px 15%;
+    margin: 15px auto;
+}
+.modal-title {
+    color: #911616;
+    font-size: 1.5em;
+    font-weight: 350;
+    margin-top: 10px;
+}
+.bground-photo .list-photographer-item__img__content {
+    width: 100;
+    height: 90vh;
+    object-fit: contain;
+    margin: auto;
+    display: block;
+}
+
+.arrow {
+  border: solid #911616;
+  border-width: 0 6px 6px 0;
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  right: 30px;
+position: absolute;
+top: 50%;
+margin-top: -18px;
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  left: 30px;
+position: absolute;
+top: 50%;
+margin-top: -18px;
+}
+
+.bground-photo .list-photographer-item__img__content {
+    border-radius: 5px;
+}
+
+.bground-photo .close {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+  }
+
+.bground-photo .close::before, .bground-photo .close::after {
+    position: absolute;
+    left: 15px;
+    content: " ";
+    height: 33px;
+    width: 5px;
+    background-color: #911616;;
+}
+
 .content {
   margin: 5% auto;
   width: 100%;
@@ -732,7 +832,15 @@ justify-content: center;
 }
 @media screen and (max-width: 900px){
 .contact-info {
-    display: none;
+  position: fixed;
+  margin: auto;
+  display: block;
+  padding: 10px 35px 10px 35px;
+  z-index: 999999;
+  left: 0;
+  right: 0;
+  width: 115px;
+  bottom: 35px;
 }
 
 .photographer-info__img {
