@@ -40,6 +40,8 @@ function closeModalcontact() {
 if(window.scrollY==0){
   document.getElementById("top").style.display = "none";}
 
+  
+
 // .className = "error";
 function nextphoto() {
   document.getElementById("modal-image").src="img/Nabeel/Portrait_Sunkissed.jpg";

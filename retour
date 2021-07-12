@@ -4,4 +4,13 @@ console.log(cur)
 textcontent js
 
 appendchild
-createelement 
+createelement
+
+
+onscroll
+
+
+https://www.w3schools.com/jsref/event_onscroll.asp
+console.log(monfichierjson.map(item=>item.tag))
+
+https://jsfiddle.net/ehbyd8v3/1/

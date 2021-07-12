@@ -1,34 +1,33 @@
 // DOM Elements
 const refrshBtn = document.querySelectorAll(".refresh-info");
 // launch modal event
-refrshBtn.forEach((btn) => btn.addEventListener("click", indexset));
+refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 
 window.onload = function() {
   indexset();
   photographeset();
 };
 
-// function readjson () {
-//    return fetch('FishEyeData.json')
-//    .then(response => {
-//        if (!response.ok) {
-//            throw new Error("HTTP error " + response.status);
-//        }
-//        return response.json();
-//    })
-//    .then(json => {
-//      .then(json => {
-//        var result = json;
-//        var dataphoto = result.photographers;
-//        console.log(result);
-//        console.log(dataphoto);
-//        return dataphoto;
-//      })
-//    })
-//    .catch(function () {
-//        this.dataError = true;
-//    })
-// }
+
+function readjson () {
+   return fetch('FishEyeData.json')
+   .then(response => {
+       if (!response.ok) {
+           throw new Error("HTTP error " + response.status);
+       }
+       return response.json();
+   })
+     .then(json => {
+       var result = json;
+       var dataphoto = result.photographers;
+       // console.log(result);
+       // console.log(dataphoto);
+       return dataphoto;
+     })
+   .catch(function () {
+       this.dataError = true;
+   })
+}
 
 
                     function get_id(dataphoto){
@@ -112,54 +111,39 @@ window.location.href = "photographe.html?"+id;}
 
 
 
-
-
-
-
-
-
-
-
-
-
 function Creator() {
+
+  readjson().then((value) => {
+  console.log(value);})
+
     this.createPhotographe = function (type) {
         var photographe;
 
-        if (type === "fulltime") {
-            photographe = new FullTime();
-        } else if (type === "parttime") {
-            photographe = new PartTime();
-        } else if (type === "temporary") {
-            photographe = new Temporary();
-        } else if (type === "contractor") {
-            photographe = new Contractor();
+        if (type === "photo") {
+            photographe = new Photo();
+        } else if (type === "video") {
+            photographe = new Video();
         }
 
         photographe.type = type;
 
         photographe.say = function () {
-            log.add(this.type + ": rate " + this.hourly + "/hour");
+            log.add(this.image);
+
         }
 
         return photographe;
     }
 }
 
-var FullTime = function () {
-    this.hourly = "$12";
+var Photo = function () {
+    this.image = "img/Ellie Rose/Sport_Jump.jpg";
+    log.appendphoto(this.image);
 };
 
-var PartTime = function () {
-    this.hourly = "$11";
-};
-
-var Temporary = function () {
-    this.hourly = "$10";
-};
-
-var Contractor = function () {
-    this.hourly = "$15";
+var Video = function () {
+    this.image = "img/ID/EllieRoseWilkens.jpg";
+    log.appendphoto(this.image);
 };
 
 // log helper
@@ -167,8 +151,10 @@ var log = (function () {
     var log = "";
 
     return {
-        add: function (msg) { log += msg + "\n"; },
+        add: function (msg) {console.log(msg); log += msg + "\n"; },
         show: function () { alert(log); log = ""; },
+        appendphoto : function (msg) { let img = document.createElement("img"); img.src =  msg; img.classList.add ("list-photographer-item__img__content");  let div = document.createElement("div"); div.classList.add ("work-photographer-item__img"); div.appendChild(img);  document.body.appendChild(div);  },
+
     }
 })();
 
@@ -176,14 +162,13 @@ function run() {
     var photographes = [];
     var creator = new Creator();
 
-    photographes.push(creator.createPhotographe("fulltime"));
-    photographes.push(creator.createPhotographe("parttime"));
-    photographes.push(creator.createPhotographe("temporary"));
-    photographes.push(creator.createPhotographe("contractor"));
+    photographes.push(creator.createPhotographe("photo"));
+
+    photographes.push(creator.createPhotographe("video"));
+
 
     for (var i = 0, len = photographes.length; i < len; i++) {
         photographes[i].say();
     }
 
-    log.show();
 }
