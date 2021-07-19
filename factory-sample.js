@@ -6,9 +6,11 @@ refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 window.onload = function() {
   indexset();
   photographeset();
+  get_id_by_tag()
+  run()
 };
 
-
+// fonction fetch
 function readjson () {
    return fetch('FishEyeData.json')
    .then(response => {
@@ -19,7 +21,7 @@ function readjson () {
    })
      .then(json => {
        var result = json;
-       var dataphoto = result.photographers;
+       var dataphoto = result;
        // console.log(result);
        // console.log(dataphoto);
        return dataphoto;
@@ -29,6 +31,7 @@ function readjson () {
    })
 }
 
+// Differentes fonctions pour recuperer les infos précises du json
 
                     function get_id(dataphoto){
 
@@ -45,7 +48,33 @@ function readjson () {
                             }
 
 
+                    function get_media_list(datamedia){
 
+                    var page_id_raw = window.location.search;
+                    var page_id = page_id_raw.substring(1);
+                    var medialist = [];
+
+                                for (var i = 0; i < datamedia.length; i++){
+                                // look for the entry with a matching `code` value
+                                if (datamedia[i].photographerId == page_id){
+                                  medialist.push(datamedia[i]);
+                                }
+                              }
+                              return medialist;
+                            }
+
+
+                            function get_id_by_tag(){
+
+                              readjson().then((value) => {
+                                    console.log(value.photographers.filter(photographers=> photographers.tags.includes('travel')));
+                                      }
+                                  )}
+
+
+
+
+// Fonctions pour afficher les photographes et leurs infos en ajax
 
 function link(id) {
 window.location.href = "photographe.html?"+id;}
@@ -94,7 +123,6 @@ window.location.href = "photographe.html?"+id;}
                             var dataphoto = data.photographers;
                             get_id(dataphoto)
                             var current_photographer = get_id(dataphoto);
-                            console.log(current_photographer);
 
                             var finaltag = ""
                                 for (var a = 0; a < current_photographer.tags.length; a++) {
@@ -109,20 +137,17 @@ window.location.href = "photographe.html?"+id;}
 
 
 
-
+// Foctory pattern pour afficher montrer et instencier les medias pour chaque photographes
 
 function Creator() {
 
-  readjson().then((value) => {
-  console.log(value);})
-
-    this.createPhotographe = function (type) {
+    this.createPhotographe = function (type, data) {
         var photographe;
 
-        if (type === "photo") {
-            photographe = new Photo();
+        if (type === "image") {
+            photographe = new Photo(data);
         } else if (type === "video") {
-            photographe = new Video();
+            photographe = new Video(data);
         }
 
         photographe.type = type;
@@ -136,14 +161,18 @@ function Creator() {
     }
 }
 
-var Photo = function () {
-    this.image = "img/Ellie Rose/Sport_Jump.jpg";
-    log.appendphoto(this.image);
+var Photo = function (data) {
+    this.image = data.image;
+    this.name = data.title;
+    this.likes =  data.likes;
+    log.appendphoto(this.image, this.name, this.likes);
 };
 
 var Video = function () {
     this.image = "img/ID/EllieRoseWilkens.jpg";
-    log.appendphoto(this.image);
+    this.name = "name";
+    this.likes = "55"
+    log.appendphoto(this.image, this.name, this.likes);
 };
 
 // log helper
@@ -153,22 +182,36 @@ var log = (function () {
     return {
         add: function (msg) {console.log(msg); log += msg + "\n"; },
         show: function () { alert(log); log = ""; },
-        appendphoto : function (msg) { let img = document.createElement("img"); img.src =  msg; img.classList.add ("list-photographer-item__img__content");  let div = document.createElement("div"); div.classList.add ("work-photographer-item__img"); div.appendChild(img);  document.body.appendChild(div);  },
+        appendphoto : function (msg, name, likes) {let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
+        let divtext = document.createElement("div"); divtext.classList.add ("work-photographer-text");
+        let namephoto = document.createElement("h4"); namephoto.innerHTML = name; namephoto.classList.add ("work-photographer-item__name");
+        let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
+        let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
+        let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
+        div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto);   },
 
     }
 })();
 
 function run() {
+
+    readjson().then((value) => {
+    console.log(value.media);
+    var current_photographer_media = get_media_list(value.media);
+    console.log(current_photographer_media);
+
+
     var photographes = [];
     var creator = new Creator();
 
-    photographes.push(creator.createPhotographe("photo"));
+      for (var i = 0; i < current_photographer_media.length; i++) {
+        console.log(current_photographer_media[i].type);
+    photographes.push(creator.createPhotographe(current_photographer_media[i].type, current_photographer_media[i]));
 
-    photographes.push(creator.createPhotographe("video"));
-
+}
 
     for (var i = 0, len = photographes.length; i < len; i++) {
         photographes[i].say();
     }
-
+})
 }

@@ -40,7 +40,7 @@ function closeModalcontact() {
 if(window.scrollY==0){
   document.getElementById("top").style.display = "none";}
 
-  
+
 
 // .className = "error";
 function nextphoto() {
