@@ -4,9 +4,11 @@ const refrshBtn = document.querySelectorAll(".refresh-info");
 refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 
 window.onload = function() {
-  indexset();
+
+  readjson().then((value) => {
+  indexset(value.photographers);
+})
   photographeset();
-  get_id_by_tag()
   run()
 };
 
@@ -64,12 +66,12 @@ function readjson () {
                             }
 
 
-                            function get_id_by_tag(){
-
+                            function get_id_by_tag(tag){
                               readjson().then((value) => {
-                                    console.log(value.photographers.filter(photographers=> photographers.tags.includes('travel')));
-                                      }
-                                  )}
+                                    var dataphoto = value.photographers.filter(photographers=> photographers.tags.includes(tag));
+                                    indexset(dataphoto);
+                                    }
+                                )}
 
 
 
@@ -95,23 +97,26 @@ window.location.href = "photographe.html?"+id;}
 
 
 
-        function indexset() {
+        function indexset(dataphoto) {
 
-                  readTextFile("FishEyeData.json", function(text){
-                    var data = JSON.parse(text);
-                    var dataphoto = data.photographers;
+          e = document.getElementById("list-photographer");
+          var child = e.lastElementChild;
+          while (child) {
+            e.removeChild(child);
+            child = e.lastElementChild;}
 
+          console.log(dataphoto);
           for (var i = 0; i < dataphoto.length; i++) {
             var objphotographe = dataphoto[i] ;
             var finaltag = ""
                 for (var a = 0; a < objphotographe.tags.length; a++) {
                   var tag = objphotographe.tags[a];
-                  finaltag = finaltag+'<p class="tag">'+tag+'</p>'
+                  finaltag = finaltag+'<p class="tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</p>'
                 }
 
                     document.getElementById("list-photographer").innerHTML +=
-                      '<div class="list-photographer-item"> <a id="'+objphotographe.id+'" onClick="link(this.id)" href="#"><div class="list-photographer-item__img"><img class="list-photographer-item__img__content" src="img/ID/'+objphotographe.portrait+'" alt=""></div><h3 class="list-photographer-item__name" >'+objphotographe.name+'</h3><div class="list-photographer-item__caption"><p class="list-photographer-item__caption__location">'+objphotographe.city+'</p><p class="list-photographer-item__caption__phrase">'+objphotographe.tagline+'</p><p class="list-photographer-item__caption__price">'+objphotographe.price+'$ par jour</p></div><div class="list-photographer-item__tags">'+finaltag+'</div></a></div>';}
-                });  }
+                      '<div class="list-photographer-item"> <a id="'+objphotographe.id+'" onClick="link(this.id)" href="#"><div class="list-photographer-item__img"><img class="list-photographer-item__img__content" src="img/ID/'+objphotographe.portrait+'" alt=""></div><h3 class="list-photographer-item__name" >'+objphotographe.name+'</h3><div class="list-photographer-item__caption"><p class="list-photographer-item__caption__location">'+objphotographe.city+'</p><p class="list-photographer-item__caption__phrase">'+objphotographe.tagline+'</p><p class="list-photographer-item__caption__price">'+objphotographe.price+'$ par jour</p></div></a><div class="list-photographer-item__tags">'+finaltag+'</div></div>';}
+                 }
 
 
 
@@ -127,11 +132,11 @@ window.location.href = "photographe.html?"+id;}
                             var finaltag = ""
                                 for (var a = 0; a < current_photographer.tags.length; a++) {
                                   var tag = current_photographer.tags[a];
-                                  finaltag = finaltag+'<p class="tag">'+tag+'</p>'
+                                  finaltag = finaltag+'<p class="tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</p>'
                                 }
 
                             document.getElementById("photographer-info").innerHTML +=
-                              '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a href"#" class="contact-info">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';
+                              '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a href"#" class="contact-info" onclick="launchModalcontact()">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';
                         });  }
 
 
@@ -168,10 +173,10 @@ var Photo = function (data) {
     log.appendphoto(this.image, this.name, this.likes);
 };
 
-var Video = function () {
-    this.image = "img/ID/EllieRoseWilkens.jpg";
-    this.name = "name";
-    this.likes = "55"
+var Video = function (data) {
+    this.image = data.video;
+    this.name = data.title;
+    this.likes =  data.likes;
     log.appendphoto(this.image, this.name, this.likes);
 };
 
@@ -188,7 +193,7 @@ var log = (function () {
         let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
         let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
         let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
-        div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto);   },
+        div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", "launchModalphoto()");   },
 
     }
 })();

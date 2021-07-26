@@ -49,6 +49,7 @@ color: #911616;
     padding: 4px 7px 4px 7px;
     margin: 5px;
     height: min-content;
+    cursor: pointer;
 }
 
 .return-top{
@@ -90,7 +91,9 @@ color: #911616;
   height: 100%;
   object-fit: cover;
 }
-
+.work-photographer-item {
+    cursor: pointer;
+}
 .trie-select {
     color: white;
     background-color: #911616;
@@ -122,6 +125,7 @@ color: #911616;
 .list-photographer-item__tags {
     display: flex;
     justify-content: center;
+     cursor: pointer;
 }
 .list-photographer-item__name{
   margin-top: 20px!important;
@@ -187,6 +191,7 @@ box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
     display: flex;
 }
 .contact-info{
+    cursor: pointer;
   color: white;
     background-color: #911616;
 padding:27px;;

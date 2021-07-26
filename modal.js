@@ -10,14 +10,11 @@ const closeBtn = document.querySelectorAll(".close");
 const formData = document.querySelectorAll(".formData");
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModalcontact));
-modalBtnphoto.forEach((btn) => btn.addEventListener("click", launchModalphoto));
 modalBtnphotonext.forEach((btn) => btn.addEventListener("click", nextphoto));
 modalBtnphotoprevious.forEach((btn) => btn.addEventListener("click", previousphoto));
 
 // close modal event
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModalcontact));
-
 
 // launch modal form
 function launchModalcontact() {
