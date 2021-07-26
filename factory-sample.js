@@ -4,12 +4,18 @@ const refrshBtn = document.querySelectorAll(".refresh-info");
 refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 
 window.onload = function() {
-
-  readjson().then((value) => {
-  indexset(value.photographers);
-})
+  var tagselect = localStorage.getItem('montag');
+  console.log(tagselect);
   photographeset();
   run()
+  if (tagselect !== null) {
+    get_id_by_tag(tagselect)
+  }
+  else {
+    readjson().then((value) => {
+    indexset(value.photographers);})
+  }
+  localStorage.clear();
 };
 
 // fonction fetch
@@ -57,7 +63,6 @@ function readjson () {
                     var medialist = [];
 
                                 for (var i = 0; i < datamedia.length; i++){
-                                // look for the entry with a matching `code` value
                                 if (datamedia[i].photographerId == page_id){
                                   medialist.push(datamedia[i]);
                                 }
@@ -73,8 +78,16 @@ function readjson () {
                                     }
                                 )}
 
+                                function set_tag(tag){
+                                  localStorage.setItem('montag', tag);
+                                  window.location.replace("http://localhost/projet-6/index.html");
+                                }
 
+// Different method pour filtrer
 
+function filter_by_like(){}
+function filter_by_date(){}
+function filter_by_title(){}
 
 // Fonctions pour afficher les photographes et leurs infos en ajax
 
@@ -132,7 +145,7 @@ window.location.href = "photographe.html?"+id;}
                             var finaltag = ""
                                 for (var a = 0; a < current_photographer.tags.length; a++) {
                                   var tag = current_photographer.tags[a];
-                                  finaltag = finaltag+'<p class="tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</p>'
+                                  finaltag = finaltag+'<p class="tag" onclick="set_tag(this.innerHTML)">'+tag+'</p>'
                                 }
 
                             document.getElementById("photographer-info").innerHTML +=
@@ -174,10 +187,10 @@ var Photo = function (data) {
 };
 
 var Video = function (data) {
-    this.image = data.video;
+    this.video = data.video;
     this.name = data.title;
     this.likes =  data.likes;
-    log.appendphoto(this.image, this.name, this.likes);
+    log.appendphoto(this.video, this.name, this.likes);
 };
 
 // log helper
