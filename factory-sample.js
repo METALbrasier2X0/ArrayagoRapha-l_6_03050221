@@ -5,7 +5,6 @@ refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 
 window.onload = function() {
   var tagselect = localStorage.getItem('montag');
-  console.log(tagselect);
   photographeset();
   run()
   if (tagselect !== null) {
@@ -30,8 +29,6 @@ function readjson () {
      .then(json => {
        var result = json;
        var dataphoto = result;
-       // console.log(result);
-       // console.log(dataphoto);
        return dataphoto;
      })
    .catch(function () {
@@ -108,8 +105,6 @@ window.location.href = "photographe.html?"+id;}
         }
 
 
-
-
         function indexset(dataphoto) {
 
           e = document.getElementById("list-photographer");
@@ -117,8 +112,6 @@ window.location.href = "photographe.html?"+id;}
           while (child) {
             e.removeChild(child);
             child = e.lastElementChild;}
-
-          console.log(dataphoto);
           for (var i = 0; i < dataphoto.length; i++) {
             var objphotographe = dataphoto[i] ;
             var finaltag = ""
@@ -130,8 +123,6 @@ window.location.href = "photographe.html?"+id;}
                     document.getElementById("list-photographer").innerHTML +=
                       '<div class="list-photographer-item"> <a id="'+objphotographe.id+'" onClick="link(this.id)" href="#"><div class="list-photographer-item__img"><img class="list-photographer-item__img__content" src="img/ID/'+objphotographe.portrait+'" alt=""></div><h3 class="list-photographer-item__name" >'+objphotographe.name+'</h3><div class="list-photographer-item__caption"><p class="list-photographer-item__caption__location">'+objphotographe.city+'</p><p class="list-photographer-item__caption__phrase">'+objphotographe.tagline+'</p><p class="list-photographer-item__caption__price">'+objphotographe.price+'$ par jour</p></div></a><div class="list-photographer-item__tags">'+finaltag+'</div></div>';}
                  }
-
-
 
 
                 function photographeset() {
@@ -153,19 +144,16 @@ window.location.href = "photographe.html?"+id;}
                         });  }
 
 
-
-
 // Foctory pattern pour afficher montrer et instencier les medias pour chaque photographes
 
 function Creator() {
 
-    this.createPhotographe = function (type, data) {
+    this.createPhotographe = function (type, data, order) {
         var photographe;
-
         if (type === "image") {
-            photographe = new Photo(data);
+            photographe = new Photo(data, order);
         } else if (type === "video") {
-            photographe = new Video(data);
+            photographe = new Video(data, order);
         }
 
         photographe.type = type;
@@ -179,14 +167,15 @@ function Creator() {
     }
 }
 
-var Photo = function (data) {
+var Photo = function (data, order) {
     this.image = data.image;
     this.name = data.title;
     this.likes =  data.likes;
-    log.appendphoto(this.image, this.name, this.likes);
+    this.order = order;
+    log.appendphoto(this.image, this.name, this.likes, this.order);
 };
 
-var Video = function (data) {
+var Video = function (data, order) {
     this.video = data.video;
     this.name = data.title;
     this.likes =  data.likes;
@@ -198,15 +187,15 @@ var log = (function () {
     var log = "";
 
     return {
-        add: function (msg) {console.log(msg); log += msg + "\n"; },
+        add: function (msg) {log += msg + "\n"; },
         show: function () { alert(log); log = ""; },
-        appendphoto : function (msg, name, likes) {let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
+        appendphoto : function (msg, name, likes, order) {let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
         let divtext = document.createElement("div"); divtext.classList.add ("work-photographer-text");
         let namephoto = document.createElement("h4"); namephoto.innerHTML = name; namephoto.classList.add ("work-photographer-item__name");
         let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
         let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
         let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
-        div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", "launchModalphoto()");   },
+        div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' ); },
 
     }
 })();
@@ -214,22 +203,20 @@ var log = (function () {
 function run() {
 
     readjson().then((value) => {
-    console.log(value.media);
     var current_photographer_media = get_media_list(value.media);
-    console.log(current_photographer_media);
-
 
     var photographes = [];
+    let col = [];
     var creator = new Creator();
 
       for (var i = 0; i < current_photographer_media.length; i++) {
-        console.log(current_photographer_media[i].type);
-    photographes.push(creator.createPhotographe(current_photographer_media[i].type, current_photographer_media[i]));
-
+    photographes.push(creator.createPhotographe(current_photographer_media[i].type, current_photographer_media[i], i));
+    col.push(current_photographer_media[i].image)
 }
 
     for (var i = 0, len = photographes.length; i < len; i++) {
         photographes[i].say();
     }
+
 })
 }
