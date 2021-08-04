@@ -159,7 +159,12 @@ function Creator() {
         photographe.type = type;
 
         photographe.say = function () {
+            if (this.imag !== null) {
             log.add(this.image);
+          }else {
+          log.add(this.video);
+          }
+
 
         }
 
@@ -189,7 +194,7 @@ var log = (function () {
     return {
         add: function (msg) {log += msg + "\n"; },
         show: function () { alert(log); log = ""; },
-        appendphoto : function (msg, name, likes, order) {let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
+        appendphoto : function (msg, name, likes, order) { let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
         let divtext = document.createElement("div"); divtext.classList.add ("work-photographer-text");
         let namephoto = document.createElement("h4"); namephoto.innerHTML = name; namephoto.classList.add ("work-photographer-item__name");
         let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';

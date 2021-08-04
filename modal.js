@@ -98,7 +98,10 @@ function set_modal_gal(curel){
     butprev.onclick=(e)=>{
   	for(let cur of lesimages)
     	cur.style.display="none";
-
+      console.log(curel);
+      if (curel == 0 ||curel == -1) {
+        curel = lesimages.length;
+      }
    lesimages[Math.abs((--curel)%lesimages.length)].style.display="block";
   }
 
