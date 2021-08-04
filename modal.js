@@ -56,60 +56,59 @@ if(window.scrollY==0){
 
 function set_modal_gal(curel){
   modalbgphoto.style.display = "block";
-  // test code modal
+  // test code modalc
   readjson().then((value) => {
   var current_photographer_media = get_media_list(value.media);
-
+  const col = []
   var photographes = [];
-  let col = [];
   var creator = new Creator();
     for (var i = 0; i < current_photographer_media.length; i++) {
-  col.push(current_photographer_media[i].image)
+   col.push(current_photographer_media[i].image)
 }
   //création d'un tableau d'image (pour simplifier le parcours par la suite)
-  let els = [];
+  let lesimages = [];
   //element courant de la galerie
-
-  //Création des éléments html
-  for(let cur of col)
+  for(let i = 0;i<col.length;i++)
   {
-  	els.push(document.createElement("img"));
-    els[els.length-1].src = cur;
-    els[els.length-1].className = "list-photographer-item__img__content";
-    document.getElementById("modal-body-photo").appendChild(els[els.length-1]);
+  	lesimages.push(document.createElement("img"))
+    lesimages[lesimages.length-1].src=col[i];
+    lesimages[lesimages.length-1].classList.add ("list-photographer-item__img__content");
+    document.getElementById("modal-body-photo").appendChild(lesimages[lesimages.length-1])
   }
-  console.log(els);
-  for(let el of els)
-    el.style.display="none";
-    //on choisit l'image que l'on veut afficher (curel++) après la première image on passe à la suivante(avec ++) puis on prend le reste de la division(modulo (%), c'est à dire 1%5 = 1, 5%5 =0 7%5 = 2, 15%5 =0) par rapport au nombre d'images que l'on as à disposition (els.length)
-  els[(curel)].style.display="block";
 
   //création du boutton suivant
   let butnext = document.createElement("i");
   butnext.className="arrow right next-photo";
-  //au click sur le boutton suivant
-  butnext.onclick=(ev)=>{
-  //on réinitialise l'affichage de toutes les images (autres que celle que l'on veut afficher)
-  	for(let el of els)
-    	el.style.display="none";
-  	els[(curel++)%els.length].style.display="block";  console.log(curel);
-  };
 
+  //création du boutton précedant
   let butprev = document.createElement("i");
   butprev.className="arrow left previous-photo";
-  //au click sur le boutton precedant
-  butprev.onclick=(ev)=>{
-  //on réinitialise l'affichage de toutes les images (autres que celle que l'on veut afficher)
-    for(let el of els)
-      el.style.display="none";
-      //on choisit l'image que l'on veut afficher (curel++) après la première image on passe à la suivante(avec ++) puis on prend le reste de la division(modulo (%), c'est à dire 1%5 = 1, 5%5 =0 7%5 = 2, 15%5 =0) par rapport au nombre d'images que l'on as à disposition (els.length)
-    els[(curel--)%els.length].style.display="block";  console.log(curel);
-    if (curel==0 || curel==-1) {
-      curel = els.length;
-    }
-  };
+
+
+  for(let cur of lesimages){
+    cur.style.display="none";
+
+ lesimages[curel].style.display="block";}
+
+
     document.getElementById("modal-body-photo").appendChild(butnext);
     document.getElementById("modal-body-photo").appendChild(butprev);
+
+
+    butprev.onclick=(e)=>{
+  	for(let cur of lesimages)
+    	cur.style.display="none";
+
+   lesimages[Math.abs((--curel)%lesimages.length)].style.display="block";
+  }
+
+
+  butnext.onclick=(e)=>{
+  	for(let cur of lesimages)
+    	cur.style.display="none";
+
+   lesimages[Math.abs((++curel)%lesimages.length)].style.display="block";
+  }
 
 })
 }
