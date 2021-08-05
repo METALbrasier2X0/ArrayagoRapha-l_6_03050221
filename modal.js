@@ -6,15 +6,14 @@ const modalBtn = document.querySelectorAll(".contact-info");
 const modalBtnphoto = document.querySelectorAll(".work-photographer-item");
 const modalBtnphotonext = document.querySelectorAll(".next-photo");
 const modalBtnphotoprevious = document.querySelectorAll(".previous-photo");
-const closeBtn = document.querySelectorAll(".close");
 const formData = document.querySelectorAll(".formData");
 
 // launch modal event
 modalBtnphotonext.forEach((btn) => btn.addEventListener("click", nextphoto));
 modalBtnphotoprevious.forEach((btn) => btn.addEventListener("click", previousphoto));
 // close modal event
-closeBtn.forEach((btn) => btn.addEventListener("click", closeModalcontact));
-
+document.getElementById("close-photo").addEventListener("click", closeModalphoto);
+document.getElementById("close-contact").addEventListener("click", closeModalcontact);
 // launch modal form
 function launchModalcontact() {
   modalbgcontact.style.display = "block";
@@ -22,26 +21,20 @@ function launchModalcontact() {
 
 // close modal form
 function closeModalcontact() {
+  document.getElementById("form").reset();
+  modalbgcontact.style.display = "none";
+};
 
+function closeModalphoto() {
   p = document.getElementById("modal-body-photo");
   var child = p.lastElementChild;
   while (child) {
     p.removeChild(child);
     child = p.lastElementChild;};
+    document.getElementById("modal-body-photo");
+    modalbgphoto.style.display = "none";
+};
 
-  document.getElementById("form").reset();
-  modalbgcontact.style.display = "none";
-  document.getElementById("modal-body-photo");
-  modalbgphoto.style.display = "none";
-  document.getElementById("valid-content").style.display = "none";
-  document.getElementById("valid").style.display = "none";
-
-
-}
-
-
-if(window.scrollY==0){
-  document.getElementById("top").style.display = "none";}
 
 
 
@@ -91,6 +84,7 @@ function set_modal_gal(curel){
         lesimages.push(document.createElement("video"))
         lesimages[lesimages.length-1].src=col[i];
         lesimages[lesimages.length-1].classList.add ("list-photographer-item__img__content");
+        lesimages[lesimages.length-1].title = current_photographer_media[i].alt;
         lesimages[lesimages.length-1].autoplay = true;
         lesimages[lesimages.length-1].loop = true;
         document.getElementById("modal-body-photo").appendChild(lesimages[lesimages.length-1]);
@@ -98,6 +92,7 @@ function set_modal_gal(curel){
       lesimages.push(document.createElement("img"))
       lesimages[lesimages.length-1].src=col[i];
       lesimages[lesimages.length-1].classList.add ("list-photographer-item__img__content");
+      lesimages[lesimages.length-1].alt = current_photographer_media[i].alt;
       document.getElementById("modal-body-photo").appendChild(lesimages[lesimages.length-1]);
     };
   }

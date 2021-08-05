@@ -18,7 +18,7 @@
       <a id="top" class="return-top" href="#header">Passer au contenu</a>
       <header id="header">
         <a class="logo" title="logo" href="index.html"><img src="img\logo.png" alt=""></a>
-        <div class="navigation navigation-index " aria-label="photographer categories"><p class="tag" onclick="get_id_by_tag(this.innerHTML)">portrait</p><p class="tag" onclick="get_id_by_tag(this.innerHTML)">travel</p><p class="tag" onclick="get_id_by_tag(this.innerHTML)">animals</p><p class="tag" onclick="get_id_by_tag(this.innerHTML)">sports</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag">architecture</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag">art</p><p class="tag" onclick="get_id_by_tag(this.innerHTML)">fashion</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag">events</p></div>
+        <div class="navigation navigation-index " aria-label="photographer categories"><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">portrait</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">travel</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">animals</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">sports</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">architecture</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">art</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">fashion</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">events</p></div>
         </header>
         <p class="photographer-link">Nos photographes</p>
 
@@ -31,6 +31,18 @@
 
     </body>
 
-<script src="factory-sample.js"></script>
-  <script src="modal.js"></script>
+<script src="main.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+  var tagselect = localStorage.getItem('montag');
+  if (tagselect !== null) {
+    get_id_by_tag(tagselect)
+  }
+  else {
+    readjson().then((value) => {
+    indexset(value.photographers);})
+  }
+  localStorage.clear();
+};
+</script>
 </html>

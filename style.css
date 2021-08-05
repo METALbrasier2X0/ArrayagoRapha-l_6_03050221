@@ -268,7 +268,7 @@ height: 100vh;
     margin-top: 10px;
 }
 .bground-photo .list-photographer-item__img__content {
-    width: 100;
+    width: 100%;
     height: 90vh;
     object-fit: contain;
     margin: auto;
