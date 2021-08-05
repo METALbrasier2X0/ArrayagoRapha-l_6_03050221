@@ -159,10 +159,10 @@ function Creator() {
         photographe.type = type;
 
         photographe.say = function () {
-            if (this.imag !== null) {
-            log.add(this.image);
-          }else {
+          if (this.image == undefined) {
           log.add(this.video);
+          }else {
+          log.add(this.image);
           }
 
 
@@ -184,7 +184,8 @@ var Video = function (data, order) {
     this.video = data.video;
     this.name = data.title;
     this.likes =  data.likes;
-    log.appendphoto(this.video, this.name, this.likes);
+    this.order = order;
+    log.appendphoto(this.video, this.name, this.likes, this.order);
 };
 
 // log helper
@@ -194,13 +195,27 @@ var log = (function () {
     return {
         add: function (msg) {log += msg + "\n"; },
         show: function () { alert(log); log = ""; },
-        appendphoto : function (msg, name, likes, order) { let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
-        let divtext = document.createElement("div"); divtext.classList.add ("work-photographer-text");
-        let namephoto = document.createElement("h4"); namephoto.innerHTML = name; namephoto.classList.add ("work-photographer-item__name");
-        let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
-        let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
-        let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
-        div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' ); },
+        appendphoto : function (msg, name, likes, order) {
+
+        if(msg.match(/(\w*)\.mp4$/) !== null){  let img = document.createElement("video"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
+          let divtext = document.createElement("div"); divtext.classList.add ("work-photographer-text");
+          let namephoto = document.createElement("h4"); namephoto.innerHTML = name; namephoto.classList.add ("work-photographer-item__name");
+          let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
+          let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
+          let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
+          div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' );}
+
+
+        else {
+          let img = document.createElement("img"); img.src = msg; img.classList.add ("list-photographer-item__img__content");
+          let divtext = document.createElement("div"); divtext.classList.add ("work-photographer-text");
+          let namephoto = document.createElement("h4"); namephoto.innerHTML = name; namephoto.classList.add ("work-photographer-item__name");
+          let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
+          let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
+          let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
+          div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' );
+        }
+      },
 
     }
 })();

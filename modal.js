@@ -63,17 +63,33 @@ function set_modal_gal(curel){
   var photographes = [];
   var creator = new Creator();
     for (var i = 0; i < current_photographer_media.length; i++) {
-   col.push(current_photographer_media[i].image)
+
+        if (current_photographer_media[i].image == undefined) {
+          col.push(current_photographer_media[i].video);
+        }else {
+            col.push(current_photographer_media[i].image);
+        };
+
+
 }
   //création d'un tableau d'image (pour simplifier le parcours par la suite)
   let lesimages = [];
   //element courant de la galerie
   for(let i = 0;i<col.length;i++)
   {
-  	lesimages.push(document.createElement("img"))
-    lesimages[lesimages.length-1].src=col[i];
-    lesimages[lesimages.length-1].classList.add ("list-photographer-item__img__content");
-    document.getElementById("modal-body-photo").appendChild(lesimages[lesimages.length-1])
+    if(col[i].match(/(\w*)\.mp4$/) !== null){
+        lesimages.push(document.createElement("video"))
+        lesimages[lesimages.length-1].src=col[i];
+        lesimages[lesimages.length-1].classList.add ("list-photographer-item__img__content");
+        lesimages[lesimages.length-1].autoplay = true;
+        lesimages[lesimages.length-1].loop = true;
+        document.getElementById("modal-body-photo").appendChild(lesimages[lesimages.length-1]);
+    }else {
+      lesimages.push(document.createElement("img"))
+      lesimages[lesimages.length-1].src=col[i];
+      lesimages[lesimages.length-1].classList.add ("list-photographer-item__img__content");
+      document.getElementById("modal-body-photo").appendChild(lesimages[lesimages.length-1]);
+    };
   }
 
   //création du boutton suivant
