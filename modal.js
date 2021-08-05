@@ -61,7 +61,17 @@ function set_modal_gal(curel){
   var current_photographer_media = get_media_list(value.media);
   const col = []
   var photographes = [];
+  var trie = document.getElementById("trie-select").value;
   var creator = new Creator();
+  if (trie == "Popularité") {
+    filter_by_like(current_photographer_media)
+  }else if (trie == "Date") {
+    filter_by_date(current_photographer_media)
+  }else if (trie == "Titre") {
+    filter_by_title(current_photographer_media)
+  }else {
+
+  }
     for (var i = 0; i < current_photographer_media.length; i++) {
 
         if (current_photographer_media[i].image == undefined) {
@@ -114,7 +124,6 @@ function set_modal_gal(curel){
     butprev.onclick=(e)=>{
   	for(let cur of lesimages)
     	cur.style.display="none";
-      console.log(curel);
       if (curel == 0 ||curel == -1) {
         curel = lesimages.length;
       }

@@ -847,7 +847,7 @@ justify-content: center;
   margin: auto;
   display: block;
   padding: 10px 35px 10px 35px;
-  z-index: 999999;
+  z-index: 1;
   left: 0;
   right: 0;
   width: 115px;
@@ -875,6 +875,11 @@ justify-content: center;
     position: relative;
     width: 300px;
     height: 220px;
+  }
+
+  .work-photographer-item {
+      cursor: pointer;
+      width: 300px;
   }
 
   .navigation-photo {

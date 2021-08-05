@@ -82,9 +82,22 @@ function readjson () {
 
 // Different method pour filtrer
 
-function filter_by_like(){}
-function filter_by_date(){}
-function filter_by_title(){}
+function filter_by_like(current_photographer_media){const sortedphotos = current_photographer_media.sort((a, b) => { return b.likes - a.likes; });}
+function filter_by_date(current_photographer_media){const sortedphotos = current_photographer_media.sort((a, b) => { let da = new Date(a.date), db = new Date(b.date);return da - db; });}
+function filter_by_title(current_photographer_media){
+
+const sortedphotos = current_photographer_media.sort((a, b) => {
+let fa = a.title.toLowerCase(),
+    fb = b.title.toLowerCase();
+
+if (fa < fb) {
+    return -1;
+}
+if (fa > fb) {
+    return 1;
+}
+return 0;
+});}
 
 // Fonctions pour afficher les photographes et leurs infos en ajax
 
@@ -223,15 +236,21 @@ var log = (function () {
 function run() {
 
     readjson().then((value) => {
+    var trie = document.getElementById("trie-select").value;
     var current_photographer_media = get_media_list(value.media);
-
     var photographes = [];
-    let col = [];
     var creator = new Creator();
+    if (trie == "Popularité") {
+      filter_by_like(current_photographer_media)
+    }else if (trie == "Date") {
+      filter_by_date(current_photographer_media)
+    }else if (trie == "Titre") {
+      filter_by_title(current_photographer_media)
+    }else {
 
+    }
       for (var i = 0; i < current_photographer_media.length; i++) {
     photographes.push(creator.createPhotographe(current_photographer_media[i].type, current_photographer_media[i], i));
-    col.push(current_photographer_media[i].image)
 }
 
     for (var i = 0, len = photographes.length; i < len; i++) {
@@ -239,4 +258,13 @@ function run() {
     }
 
 })
+}
+
+function filterchange(){
+  g = document.getElementById("work-photographer");
+  var child = g.lastElementChild;
+  while (child) {
+    g.removeChild(child);
+    child = g.lastElementChild;};
+    run();
 }
