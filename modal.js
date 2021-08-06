@@ -100,11 +100,12 @@ function set_modal_gal(curel){
   //création du boutton suivant
   let butnext = document.createElement("i");
   butnext.className="arrow right next-photo";
+  butnext.ariaLabel="Next image";
 
   //création du boutton précedant
   let butprev = document.createElement("i");
   butprev.className="arrow left previous-photo";
-
+  butprev.ariaLabel="Previous image";
 
   for(let cur of lesimages){
     cur.style.display="none";

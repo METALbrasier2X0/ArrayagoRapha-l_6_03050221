@@ -148,7 +148,7 @@ function applytag(dataphoto) {
                                 }
                             document.getElementById("photographer-info").innerHTML +=
                               '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a aria-label="Contact me" href"#" class="contact-info" onclick="launchModalcontact()">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" alt="'+current_photographer.alt+'" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';   document.getElementById("stats").innerHTML +=
-                                  ' <p>'+current_photographer.likes+'<i onClick="addlike()" class="fas fa-heart" aria-hidden="true"></i></p><p>'+current_photographer.price+'$</p>';
+                                  ' <div id="likes_photo"> <p id="likes">'+current_photographer.likes+'</p><i onClick="addlike()" class="fas fa-heart" aria-hidden="true"></i></div><p>'+current_photographer.price+'$</p>';
 
 
                         });  }
@@ -269,10 +269,5 @@ function filterchange(){
 }
 
 function addlike(){
-  readjson().then((value) => {
-  var current_photo = get_id(value.photographers)
-  console.log(current_photo);
-  current_photo.likes = current_photo.likes + 1 ;
-  console.log(current_photo.likes);
-})
+document.getElementById("likes").innerHTML++
 }
