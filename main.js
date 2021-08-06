@@ -32,6 +32,9 @@ var info =  get();
 console.log(info);
 info.click();
    break;
+   case "Escape":
+closeModalcontact()
+  break;
 }
 });
 
