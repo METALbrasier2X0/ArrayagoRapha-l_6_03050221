@@ -9,6 +9,32 @@ const message = document.getElementById("message");
 refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 
 
+function sendfun(info){
+get(info)
+return info
+};
+
+function get(value){
+  if (value == null) {
+    return result
+  }else {
+    result = value;
+      return result;
+  }
+
+}
+
+window.addEventListener("keydown", function (event) {
+
+switch (event.key) {
+    case "Enter":
+var info =  get();
+console.log(info);
+info.click();
+   break;
+}
+});
+
 // fonction fetch
 function readjson () {
    return fetch('FishEyeData.json')
@@ -125,11 +151,11 @@ function applytag(dataphoto) {
             var finaltag = ""
                 for (var a = 0; a < objphotographe.tags.length; a++) {
                   var tag = objphotographe.tags[a];
-                  finaltag = finaltag+'<span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</span>'
+                  finaltag = finaltag+'<span class="tag" onfocus="sendfun(this)" tabindex="0" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</span>'
                 }
 
                     document.getElementById("list-photographer").innerHTML +=
-                      '<div class="list-photographer-item"> <a id="'+objphotographe.id+'" onClick="link(this.id)" href="#"><div class="list-photographer-item__img"><img class="list-photographer-item__img__content" alt="'+objphotographe.alt+'" src="img/ID/'+objphotographe.portrait+'" alt=""></div><h3 class="list-photographer-item__name" >'+objphotographe.name+'</h3><div class="list-photographer-item__caption"><p class="list-photographer-item__caption__location">'+objphotographe.city+'</p><p class="list-photographer-item__caption__phrase">'+objphotographe.tagline+'</p><p class="list-photographer-item__caption__price">'+objphotographe.price+'$ par jour</p></div></a><div class="list-photographer-item__tags">'+finaltag+'</div></div>';}
+                      '<div class="list-photographer-item"> <a id="'+objphotographe.id+'" onfocus="sendfun(this)" onClick="link(this.id)" href="#"><div class="list-photographer-item__img"><img class="list-photographer-item__img__content" alt="'+objphotographe.alt+'" src="img/ID/'+objphotographe.portrait+'" alt=""></div><h3 class="list-photographer-item__name" >'+objphotographe.name+'</h3><div class="list-photographer-item__caption"><p class="list-photographer-item__caption__location">'+objphotographe.city+'</p><p class="list-photographer-item__caption__phrase">'+objphotographe.tagline+'</p><p class="list-photographer-item__caption__price">'+objphotographe.price+'$ par jour</p></div></a><div class="list-photographer-item__tags">'+finaltag+'</div></div>';}
                  }
 
 
@@ -144,10 +170,10 @@ function applytag(dataphoto) {
                             var finaltag = ""
                                 for (var a = 0; a < current_photographer.tags.length; a++) {
                                   var tag = current_photographer.tags[a];
-                                  finaltag = finaltag+'<span class="tag" aria-label="Tag" onclick="set_tag(this.innerHTML)">'+tag+'</span>'
+                                  finaltag = finaltag+'<span class="tag" onfocus="sendfun(this)" tabindex="0" aria-label="Tag" onclick="set_tag(this.innerHTML)">'+tag+'</span>'
                                 }
                             document.getElementById("photographer-info").innerHTML +=
-                              '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a aria-label="Contact me" href"#" class="contact-info" onclick="launchModalcontact()">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" alt="'+current_photographer.alt+'" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';   document.getElementById("stats").innerHTML +=
+                              '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a tabindex="0" aria-label="Contact me" href"#" class="contact-info" onfocus="sendfun(this)" onclick="launchModalcontact()">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" alt="'+current_photographer.alt+'" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';   document.getElementById("stats").innerHTML +=
                                   ' <div id="likes_photo"> <p id="likes">'+current_photographer.likes+'</p><i onClick="addlike()" class="fas fa-heart" aria-hidden="true"></i></div><p>'+current_photographer.price+'$</p>';
 
 
@@ -215,7 +241,7 @@ var log = (function () {
           let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
           let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
           let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
-          div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' );}
+          div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("tabindex", '0');  divphoto.setAttribute("onfocus", 'sendfun(this)');  divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' );}
 
 
         else {
@@ -225,7 +251,7 @@ var log = (function () {
           let plikes = document.createElement("p"); plikes.classList.add ("work-photographer-item__likes"); plikes.innerHTML = likes+'<i class="fas fa-heart" aria-hidden="true"></i>';
           let div = document.createElement("div"); div.classList.add ("work-photographer-item__img");
           let divphoto = document.createElement("div"); divphoto.classList.add ("work-photographer-item");
-          div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' );
+          div.appendChild(img); divphoto.appendChild(div);  divphoto.appendChild(divtext) ; divtext.appendChild(namephoto);divtext.appendChild(plikes);  document.getElementById("work-photographer").appendChild(divphoto); divphoto.setAttribute("tabindex", '0'); divphoto.setAttribute("onfocus", 'sendfun(this)');  divphoto.setAttribute("onclick", 'set_modal_gal('+order+')' );
         }
       },
 
