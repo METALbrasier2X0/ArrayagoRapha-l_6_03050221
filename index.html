@@ -17,8 +17,8 @@
     <body>
       <a id="top" class="return-top" href="#header">Passer au contenu</a>
       <header id="header">
-        <a class="logo" title="logo" href="index.html"><img src="img\logo.png" alt=""></a>
-        <div class="navigation navigation-index " aria-label="photographer categories"><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">portrait</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">travel</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">animals</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">sports</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">architecture</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">art</p><p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">fashion</p><p onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">events</p></div>
+        <a aria-label="Fisheye Home Page" class="logo" title="logo" href="index.html"><img src="img\logo.png" alt="Fisheye Home Page"></a>
+        <div class="navigation navigation-index " aria-label="photographer categories"><span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">portrait</span><span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">travel</span><span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">animals</span><span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">sports</span><span onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">architecture</span><span onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">art</span><span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">fashion</span><span onclick="get_id_by_tag(this.innerHTML)" class="tag" aria-label="Tag">events</span></div>
         </header>
         <p class="photographer-link">Nos photographes</p>
 
@@ -44,5 +44,15 @@ window.onload = function() {
   }
   localStorage.clear();
 };
+
+    window.onscroll = function() {backtop()};
+
+
+  function backtop() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      document.getElementById("top").style.display = "block";
+    } else {
+      document.getElementById("top").style.display = "none";}
+    }
 </script>
 </html>

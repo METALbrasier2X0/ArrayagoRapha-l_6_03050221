@@ -133,5 +133,31 @@ function set_modal_gal(curel){
    lesimages[Math.abs((++curel)%lesimages.length)].style.display="block";
   }
 
+  window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+      return; // Ne devrait rien faire si l'événement de la touche était déjà consommé.
+    }
+
+  switch (event.key) {
+      case "ArrowLeft":
+      for(let cur of lesimages)
+        cur.style.display="none";
+        if (curel == 0 ||curel == -1) {
+          curel = lesimages.length;
+        }
+     lesimages[Math.abs((--curel)%lesimages.length)].style.display="block";
+          break;
+      case "ArrowRight":
+      for(let cur of lesimages)
+        cur.style.display="none";
+
+     lesimages[Math.abs((++curel)%lesimages.length)].style.display="block";
+          break;
+          case "Escape":
+     closeModalphoto();
+     break;
+  }
+});
+
 })
 }

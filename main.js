@@ -1,5 +1,10 @@
 // DOM Elements
+const form = document.getElementById("form");
 const refrshBtn = document.querySelectorAll(".refresh-info");
+const firstName = document.getElementById("first");
+const lastName = document.getElementById("last");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
 // launch modal event
 refrshBtn.forEach((btn) => btn.addEventListener("click", run));
 
@@ -120,7 +125,7 @@ function applytag(dataphoto) {
             var finaltag = ""
                 for (var a = 0; a < objphotographe.tags.length; a++) {
                   var tag = objphotographe.tags[a];
-                  finaltag = finaltag+'<p class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</p>'
+                  finaltag = finaltag+'<span class="tag" aria-label="Tag" onclick="get_id_by_tag(this.innerHTML)">'+tag+'</span>'
                 }
 
                     document.getElementById("list-photographer").innerHTML +=
@@ -139,11 +144,13 @@ function applytag(dataphoto) {
                             var finaltag = ""
                                 for (var a = 0; a < current_photographer.tags.length; a++) {
                                   var tag = current_photographer.tags[a];
-                                  finaltag = finaltag+'<p class="tag" aria-label="Tag" onclick="set_tag(this.innerHTML)">'+tag+'</p>'
+                                  finaltag = finaltag+'<span class="tag" aria-label="Tag" onclick="set_tag(this.innerHTML)">'+tag+'</span>'
                                 }
-
                             document.getElementById("photographer-info").innerHTML +=
-                              '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a href"#" class="contact-info" onclick="launchModalcontact()">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" alt="'+current_photographer.alt+'" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';
+                              '  <div class="top-info"> <h2 class="photographer-info__name" >'+current_photographer.name+'</h3>   <a aria-label="Contact me" href"#" class="contact-info" onclick="launchModalcontact()">Contactez moi</a></div> <div class="photographer-info__caption"> <p class="photographer-info__caption__location">'+current_photographer.city+'</p> <p class="photographer-info__caption__phrase">'+current_photographer.tagline+'</p> <div class="navigation navigation-photo" aria-label="photographer categories">'+finaltag+'</div> <div class="photographer-info__img"><img class="photographer-info__img__content" alt="'+current_photographer.alt+'" src="img/ID/'+current_photographer.portrait+'" alt=""> </div>';   document.getElementById("stats").innerHTML +=
+                                  ' <p>'+current_photographer.likes+'<i onClick="addlike()" class="fas fa-heart" aria-hidden="true"></i></p><p>'+current_photographer.price+'$</p>';
+
+
                         });  }
 
 
@@ -261,7 +268,11 @@ function filterchange(){
     run();
 }
 
-
-function topshow(){
-if(window.scrollY==0){
-  document.getElementById("top").style.display = "none";}}
+function addlike(){
+  readjson().then((value) => {
+  var current_photo = get_id(value.photographers)
+  console.log(current_photo);
+  current_photo.likes = current_photo.likes + 1 ;
+  console.log(current_photo.likes);
+})
+}

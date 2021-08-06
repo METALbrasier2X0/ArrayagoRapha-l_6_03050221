@@ -20,12 +20,6 @@
         </header>
 
         <section id="photographer-info">
-          <!-- <div class="top-info"> <h2 class="photographer-info__name" >NAME</h3>   <a href"#" class="contact-info">Contactez moi</a></div>
-           <div class="photographer-info__caption">
-           <p class="photographer-info__caption__location">London, UK</p>
-           <p class="photographer-info__caption__phrase">bruh</p>
-               <div class="navigation navigation-photo" aria-label="photographer categories"><p class="tag">bruh</p><p class="tag">bruh</p><p class="tag">bruh</p><p class="tag">bruh</p><p class="tag">bruh</p></div>
-           <div class="photographer-info__img"><img class="photographer-info__img__content" src="img\ID\NabeelBradford.jpg" alt=""> </div> -->
         </section>
 
         <div class="bground bground-contact">
@@ -72,12 +66,9 @@
                 <div
                   class="formData">
                   <label>Message</label><br>
-                  <input
-                    class="text-control"
-                    type="text"
-                    id="message"
-                    name="message"
-                  /><p class="error" id="errormessage"></p>
+                  <textarea id="message" class="text-control">
+
+                  </textarea><p class="error" id="errormessage"></p>
                 </div>
                 <input
                   class="btn-submit"
@@ -100,6 +91,10 @@
       </section>
       </div>
 
+      <div id="stats">
+
+      </div>
+
       <div class="bground bground-photo">
         <div class="content">
           <span aria-label="Fermer" class="close" id="close-photo"></span>
@@ -116,5 +111,16 @@
   <script type="text/javascript">
   photographeset();
   run()
+
+  function validate(){
+  console.log(firstName.value);
+  console.log(lastName.value);
+  console.log(email.value);
+  console.log(message.value);
+  }
+
+  function handleForm(event) { event.preventDefault(); }
+  form.addEventListener('submit', handleForm);
+
   </script>
 </html>
